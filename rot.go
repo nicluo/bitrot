@@ -6,6 +6,7 @@ import (
   "io/ioutil"
   "os"
   "path/filepath"
+  "regexp"
 )
 
 func ensureDirectories() {
@@ -73,7 +74,11 @@ func main() {
   files, err := ioutil.ReadDir("./photos/")
   check(err)
 
+  r, _ := regexp.Compile("(?i)(gif|png|jpe?g)$")
+
   for _, fileinfo := range files {
-    rot(fileinfo.Name())
+    if r.MatchString(fileinfo.Name()) {
+      rot(fileinfo.Name())
+    }
   }
 }
