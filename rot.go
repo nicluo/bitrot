@@ -55,16 +55,20 @@ func checksum(path string){
   fmt.Printf("%s\n%d bytes: %d\n", path, n1, n2)
 }
 
+func matchImageExtension(filename string) bool {
+  r, _ := regexp.Compile("(?i)(gif|png|jpe?g)$")
+
+  return r.MatchString(filename)
+}
+
 func main() {
   ensureDirectories()
 
   files, err := ioutil.ReadDir("./photos/")
   check(err)
 
-  r, _ := regexp.Compile("(?i)(gif|png|jpe?g)$")
-
   for _, fileinfo := range files {
-    if r.MatchString(fileinfo.Name()) {
+    if matchImageExtension(fileinfo.Name()) {
       rot(fileinfo.Name())
     }
   }
