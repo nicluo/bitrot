@@ -4,6 +4,6 @@ Bit Rot Emulator written in Go / Golang
 
 To run:
 
-    go run rot.go
+    go run main.go
 
 Comments are welcome!
